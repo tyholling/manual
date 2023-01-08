@@ -10,8 +10,7 @@
 		mv container-registry.service /etc/systemd/system/
 		restorecon -v /etc/systemd/system/container-registry.service
 		podman rm -f registry
-		systemctl enable container-registry
-		systemctl start container-registry
+		systemctl enable --now container-registry
 		podman ps
 
 		# vim /etc/containers/registries.conf.d/localhost.conf
