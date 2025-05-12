@@ -1,9 +1,9 @@
-# Installing Kubernetes on CentOS Stream 9
+# Installing Kubernetes on Fedora 42
 
 1. Disable swap
    ```
    swapoff -a
-   sed -i '/swap/s/^/# /g' /etc/fstab
+   dnf remove -y zram-generator
    ```
 1. Disable SELinux
    ```
@@ -22,6 +22,10 @@
 1. Disable firewall
    ```
    systemctl disable --now firewalld
+   ```
+1. Configure DNS
+   ```
+   ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
    ```
 1. Configure kernel parameters
    ```
@@ -63,7 +67,7 @@
    ```
 1. Initialize the cluster
    ```
-   kubeadm init --node-name centos --pod-network-cidr=10.244.0.0/16
+   kubeadm init --node-name fedora --pod-network-cidr=10.244.0.0/16
    mkdir ~/.kube
    cp -i /etc/kubernetes/admin.conf ~/.kube/config
    ```

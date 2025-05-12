@@ -40,7 +40,7 @@
 
    systemctl enable --now crio
    ```
-1. Install Kubernetes packages
+1. Install Kubernetes
    ```
    export KUBERNETES_VERSION=v1.32
    curl -fsSL https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/deb/Release.key \
