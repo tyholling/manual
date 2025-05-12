@@ -12,12 +12,11 @@
    ```
 1. Load kernel modules
    ```
-   modprobe br_netfilter
-   modprobe overlay
    cat << eof > /etc/modules-load.d/kubernetes.conf
    br_netfilter
    overlay
    eof
+   systemctl restart systemd-modules-load
    ```
 1. Disable firewall
    ```
@@ -44,7 +43,7 @@
    gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/rpm/repodata/repomd.xml.key
    eof
 
-   dnf install -y container-selinux cri-o
+   dnf install -y cri-o
    systemctl enable --now crio
    ```
 1. Install Kubernetes
