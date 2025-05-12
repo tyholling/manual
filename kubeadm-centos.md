@@ -58,7 +58,7 @@
    gpgkey=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/repodata/repomd.xml.key
    eof
 
-   dnf install -y kubeadm kubelet kubectl
+   dnf install -y kubeadm kubelet kubectl kubernetes-cni
    ```
 1. Initialize the cluster
    ```
