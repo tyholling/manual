@@ -50,7 +50,7 @@
    eof
 
    apt-get update
-   apt-get install -y kubeadm kubelet kubectl
+   apt-get install -y kubeadm kubelet kubectl kubernetes-cni
    ```
 1. Initialize the cluster
    ```
