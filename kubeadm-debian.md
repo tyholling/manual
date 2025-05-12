@@ -25,6 +25,8 @@
    ```
 1. Install CRI-O
    ```
+   apt-get install -y software-properties-common curl
+
    export CRIO_VERSION=v1.32
    curl -fsSL https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/deb/Release.key \
    | gpg --dearmor -o /etc/apt/keyrings/cri-o-apt-keyring.gpg
@@ -34,7 +36,6 @@
    eof
 
    apt-get update
-   apt-get install -y software-properties-common curl
    apt-get install -y cri-o
 
    systemctl enable --now crio
