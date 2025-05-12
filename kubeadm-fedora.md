@@ -12,20 +12,15 @@
    ```
 1. Load kernel modules
    ```
-   modprobe br_netfilter
-   modprobe overlay
    cat << eof > /etc/modules-load.d/kubernetes.conf
    br_netfilter
    overlay
    eof
+   systemctl restart systemd-modules-load
    ```
 1. Disable firewall
    ```
    systemctl disable --now firewalld
-   ```
-1. Configure DNS
-   ```
-   ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
    ```
 1. Configure kernel parameters
    ```
@@ -48,7 +43,7 @@
    gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/rpm/repodata/repomd.xml.key
    eof
 
-   dnf install -y container-selinux cri-o
+   dnf install -y cri-o
    systemctl enable --now crio
    ```
 1. Install Kubernetes
@@ -63,7 +58,7 @@
    gpgkey=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/repodata/repomd.xml.key
    eof
 
-   dnf install -y kubeadm kubelet kubectl
+   dnf install -y kubeadm kubelet kubectl kubernetes-cni
    ```
 1. Initialize the cluster
    ```
