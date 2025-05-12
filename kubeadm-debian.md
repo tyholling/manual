@@ -7,12 +7,11 @@
    ```
 1. Load kernel modules
    ```
-   modprobe br_netfilter
-   modprobe overlay
    cat << eof > /etc/modules-load.d/kubernetes.conf
    br_netfilter
    overlay
    eof
+   systemctl restart systemd-modules-load
    ```
 1. Configure kernel parameters
    ```
