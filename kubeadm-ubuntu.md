@@ -7,7 +7,8 @@
    ```
 1. Configure DNS
    ```
-   apt-get remove -y systemd-resolved
+   systemctl disable --now systemd-resolved
+   ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
    ```
 1. Load kernel modules
    ```
