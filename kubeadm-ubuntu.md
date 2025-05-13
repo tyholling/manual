@@ -5,6 +5,10 @@
    swapoff -a
    sed -i '/swap/s/^/# /g' /etc/fstab
    ```
+1. Configure DNS
+   ```
+   apt-get remove -y systemd-resolved
+   ```
 1. Load kernel modules
    ```
    cat << eof > /etc/modules-load.d/kubernetes.conf
@@ -36,7 +40,6 @@
 
    apt-get update
    apt-get install -y cri-o
-
    systemctl enable --now crio
    ```
 1. Install Kubernetes
@@ -51,6 +54,7 @@
 
    apt-get update
    apt-get install -y kubeadm kubelet kubectl kubernetes-cni
+   systemctl enable kubelet
    ```
 1. Initialize the cluster
    ```
