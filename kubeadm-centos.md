@@ -59,6 +59,7 @@
    eof
 
    dnf install -y kubeadm kubelet kubectl kubernetes-cni
+   systemctl enable kubelet
    ```
 1. Initialize the cluster
    ```
