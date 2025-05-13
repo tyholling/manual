@@ -10,6 +10,10 @@
    setenforce 0
    sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
    ```
+1. Disable firewall
+   ```
+   systemctl disable --now firewalld
+   ```
 1. Load kernel modules
    ```
    cat << eof > /etc/modules-load.d/kubernetes.conf
@@ -17,10 +21,6 @@
    overlay
    eof
    systemctl restart systemd-modules-load
-   ```
-1. Disable firewall
-   ```
-   systemctl disable --now firewalld
    ```
 1. Configure kernel parameters
    ```
@@ -59,6 +59,7 @@
    eof
 
    dnf install -y kubeadm kubelet kubectl kubernetes-cni
+   systemctl enable kubelet
    ```
 1. Initialize the cluster
    ```
