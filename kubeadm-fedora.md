@@ -14,6 +14,10 @@
    ```
    systemctl disable --now firewalld
    ```
+1. Configure DNS
+   ```
+   dnf remove -y systemd-resolved
+   ```
 1. Load kernel modules
    ```
    cat << eof > /etc/modules-load.d/kubernetes.conf
