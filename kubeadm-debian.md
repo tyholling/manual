@@ -40,7 +40,6 @@
 
    apt-get update
    apt-get install -y cri-o
-
    systemctl enable --now crio
    ```
 1. Install Kubernetes
