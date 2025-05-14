@@ -57,6 +57,7 @@
    apt-get install -y kubeadm kubelet kubectl kubernetes-cni
    systemctl enable kubelet
    ```
+---
 1. Initialize the cluster
    ```
    kubeadm init --node-name ubuntu --pod-network-cidr=10.244.0.0/16
@@ -66,4 +67,17 @@
 1. Install Flannel
    ```
    kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+   ```
+1. Configure DNS
+   ```
+   systemctl enable --now systemd-resolved
+   ```
+---
+1. Join the cluster
+   ```
+   kubeadm join ...
+   ```
+1. Configure DNS
+   ```
+   systemctl enable --now systemd-resolved
    ```
