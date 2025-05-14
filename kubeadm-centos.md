@@ -72,16 +72,8 @@
    ```
    kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
    ```
-1. Configure DNS
-   ```
-   systemctl enable --now systemd-resolved
-   ```
 ---
 1. Join the cluster
    ```
    kubeadm join ...
-   ```
-1. Configure DNS
-   ```
-   systemctl enable --now systemd-resolved
    ```
