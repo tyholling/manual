@@ -3,7 +3,8 @@
 1. Disable swap
    ```
    swapoff -a
-   sed -i '/swap/s/^/# /g' /etc/fstab
+   sed -i '/swap/s/^[^#]/# /g' /etc/fstab
+   systemctl mask swap.target
    ```
 1. Load kernel modules
    ```

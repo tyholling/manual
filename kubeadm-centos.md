@@ -3,7 +3,7 @@
 1. Disable swap
    ```
    swapoff -a
-   sed -i '/swap/s/^/# /g' /etc/fstab
+   sed -i '/swap/s/^[^#]/# /g' /etc/fstab
    ```
 1. Disable SELinux
    ```
