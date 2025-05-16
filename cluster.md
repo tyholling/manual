@@ -25,13 +25,13 @@
    ```
    kubectl create ns kube-flannel
    helm repo add flannel https://flannel-io.github.io/flannel/
-   helm install flannel -n kube-flannel flannel/flannel
+   helm install flannel -n flannel flannel/flannel
    ```
 1. Install [metallb](https://github.com/metallb/metallb)
    ```
    kubectl create ns kube-metallb
    helm repo add metallb https://metallb.github.io/metallb
-   helm install metallb -n kube-metallb metallb/metallb
+   helm install metallb -n metallb metallb/metallb
    ```
    - Configure the IP address pool
      - https://metallb.universe.tf/configuration/#defining-the-ips-to-assign-to-the-load-balancer-services
@@ -71,7 +71,7 @@
    ```
    kubectl create namespace ingress-nginx
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-   helm install nginx ingress-nginx/ingress-nginx -n ingress-nginx
+   helm install nginx -n nginx ingress-nginx/ingress-nginx
    ``
 1. Test the nginx 404 page:
    ```
