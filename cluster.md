@@ -69,10 +69,10 @@
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
    ```
-   kubectl create namespace nginx
+   kubectl create ns nginx
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
    helm install nginx -n nginx ingress-nginx/ingress-nginx
-   ``
+   ```
 1. Test the nginx 404 page:
    ```
    curl 192.168.64.100
