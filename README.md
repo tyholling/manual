@@ -71,11 +71,16 @@
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
    ```
-   kubectl create ns nginx
+   kubectl create ns ingress
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-   helm install nginx -n nginx ingress-nginx/ingress-nginx
+   helm install ingress -n ingress ingress-nginx/ingress-nginx
    ```
 1. Test the nginx 404 page:
    ```
    curl 192.168.64.100
    ```
+1. Install [metrics-server](https://github.com/kubernetes-sigs/metrics-server)
+   ```
+   kubectl create ns metrics
+   helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+   helm install metrics -n metrics metrics-server/metrics-server --set args={--kubelet-insecure-tls}
