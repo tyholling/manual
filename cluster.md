@@ -23,13 +23,13 @@
 
 1. Install [flannel](https://github.com/flannel-io/flannel)
    ```
-   kubectl create ns kube-flannel
+   kubectl create ns flannel
    helm repo add flannel https://flannel-io.github.io/flannel/
    helm install flannel -n flannel flannel/flannel
    ```
 1. Install [metallb](https://github.com/metallb/metallb)
    ```
-   kubectl create ns kube-metallb
+   kubectl create ns metallb
    helm repo add metallb https://metallb.github.io/metallb
    helm install metallb -n metallb metallb/metallb
    ```
@@ -69,7 +69,7 @@
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
    ```
-   kubectl create namespace ingress-nginx
+   kubectl create namespace nginx
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
    helm install nginx -n nginx ingress-nginx/ingress-nginx
    ``
