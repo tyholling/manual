@@ -69,7 +69,18 @@
 ---
 1. Initialize the cluster
    ```
-   kubeadm init --node-name fedora --pod-network-cidr=10.244.0.0/16
+   cat << eof > kubeadm-config.yaml
+   apiVersion: kubeadm.k8s.io/v1beta4
+   kind: ClusterConfiguration
+   networking:
+     podSubnet: 10.244.0.0/16
+   ---
+   apiVersion: kubelet.config.k8s.io/v1beta1
+   kind: KubeletConfiguration
+   serverTLSBootstrap: true
+   eof
+
+   kubeadm init --node-name fedora --config kubeadm-config.yaml
    mkdir ~/.kube
    cp -i /etc/kubernetes/admin.conf ~/.kube/config
    ```
