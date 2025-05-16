@@ -60,10 +60,6 @@
    mkdir ~/.kube
    cp -i /etc/kubernetes/admin.conf ~/.kube/config
    ```
-1. Install Flannel
-   ```
-   kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
-   ```
 ---
 1. Join the cluster
    ```
