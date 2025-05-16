@@ -20,11 +20,19 @@
 1. On macOS:
    - `brew install kubectl helm`
    - Copy `/etc/kubernetes/admin.conf` from the control plane node to `~/.kube/config`
-   - Install MetalLB
-     - https://metallb.universe.tf/installation/#installation-by-manifest
-     ```
-     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
-     ```
+
+1. Install [flannel](https://github.com/flannel-io/flannel)
+   ```
+   kubectl create ns kube-flannel
+   helm repo add flannel https://flannel-io.github.io/flannel/
+   helm install flannel -n kube-flannel flannel/flannel
+   ```
+1. Install [metallb](https://github.com/metallb/metallb)
+   ```
+   kubectl create ns kube-metallb
+   helm repo add metallb https://metallb.github.io/metallb
+   helm install metallb -n kube-metallb metallb/metallb
+   ```
    - Configure the IP address pool
      - https://metallb.universe.tf/configuration/#defining-the-ips-to-assign-to-the-load-balancer-services
      - This is the pool of available addresses to assign to load balancer services
@@ -36,7 +44,7 @@
      kind: IPAddressPool
      metadata:
        name: ip-address-pool
-       namespace: metallb-system
+       namespace: kube-metallb
      spec:
        addresses:
        - 192.168.64.100/32
@@ -54,18 +62,18 @@
      kind: L2Advertisement
      metadata:
        name: l2-advertisement
-       namespace: metallb-system
+       namespace: kube-metallb
      eof
 
      kubectl apply -f l2advertisement.yaml
      ```
-   - Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
-     ```
-     kubectl create namespace ingress-nginx
-     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-     helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
-     ```
-   - From macOS, test the nginx 404 page:
-     ```
-     curl 192.168.64.100
-     ```
+1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+   ```
+   kubectl create namespace ingress-nginx
+   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+   helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+   ``
+1. Test the nginx 404 page:
+   ```
+   curl 192.168.64.100
+   ```
