@@ -39,12 +39,12 @@
      - In this example, one IP is selected: `192.168.64.100`
      - This IP cannot be the same as any of the virtual machines
      ```
-     cat << eof > ipaddresspool.yaml
+     cat << eof > ip-address-pool.yaml
      apiVersion: metallb.io/v1beta1
      kind: IPAddressPool
      metadata:
        name: ip-address-pool
-       namespace: kube-metallb
+       namespace: metallb
      spec:
        addresses:
        - 192.168.64.100/32
@@ -52,20 +52,20 @@
        avoidBuggyIPs: true
      eof
 
-     kubectl apply -f ipaddresspool.yaml
+     kubectl apply -f ip-address-pool.yaml
      ```
    - Configure the Layer 2 advertisement
      - https://metallb.universe.tf/configuration/#layer-2-configuration
      ```
-     cat << eof > l2advertisement.yaml
+     cat << eof > l2-advertisement.yaml
      apiVersion: metallb.io/v1beta1
      kind: L2Advertisement
      metadata:
        name: l2-advertisement
-       namespace: kube-metallb
+       namespace: metallb
      eof
 
-     kubectl apply -f l2advertisement.yaml
+     kubectl apply -f l2-advertisement.yaml
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
    ```
