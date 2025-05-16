@@ -1,8 +1,10 @@
 # Run a Kubernetes cluster on macOS (arm64)
 
-1. Create one node for the control plane and worker node(s)
-   - First, for the control plane node, initialize the cluster
-   - Then, for each worker node, join the cluster
+1. Create virtual machines (nodes)
+   - Create one node for the control plane (for example, `centos`)
+     - On the control plane node, initialize the cluster
+   - Create one or more worker nodes (for example, `debian`,`fedora`,`ubuntu`)
+     - On each worker node, join the cluster
    - CentOS Stream
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/centos)
      - [Install Kubernetes](kubeadm-centos.md)
