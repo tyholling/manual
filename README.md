@@ -53,7 +53,6 @@
        autoAssign: true
        avoidBuggyIPs: true
      eof
-
      kubectl apply -f ip-address-pool.yaml
      ```
    - Configure the Layer 2 advertisement
@@ -66,7 +65,6 @@
        name: l2-advertisement
        namespace: metallb
      eof
-
      kubectl apply -f l2-advertisement.yaml
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
