@@ -81,4 +81,5 @@
    ```
    kubectl create ns metrics
    helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-   helm install metrics -n metrics metrics-server/metrics-server
+   helm install metrics -n metrics metrics-server/metrics-server --set args={--kubelet-insecure-tls}
+   ```
