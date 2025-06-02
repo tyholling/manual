@@ -19,6 +19,22 @@
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/ubuntu/kubelet.sh)
    - The nodes will have IPs in 192.168.64.0/24, see `/var/db/dhcpd_leases`
 
+1. Initialize the cluster (e.g. `centos` for the control node and `debian` for a worker`
+   ```
+   ssh centos
+   kubeadm init --pod-network-cidr=10.244.0.0/16
+   mkdir ~/.kube
+   cp -i /etc/kubernetes/admin.conf ~/.kube/config
+   ```
+   ```
+   ssh debian
+   kubeadm join ...
+   ```
+   - Note: for Fedora and Ubuntu, after `kubeadm init` or `kubeadm join`:
+   ```
+   systemctl enable --now systemd-resolved
+   ```
+
 1. On macOS:
    - `brew install kubectl helm`
    - Copy `/etc/kubernetes/admin.conf` from the control plane node to `~/.kube/config`
