@@ -7,16 +7,16 @@
      - On each worker node, join the cluster
    - CentOS Stream
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/centos)
-     - [Install Kubernetes](kubeadm-centos.md)
+     - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/centos/kubelet.sh)
    - Debian
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/debian)
-     - [Install Kubernetes](kubeadm-debian.md)
+     - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/debian/kubelet.sh)
    - Fedora
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/fedora)
-     - [Install Kubernetes](kubeadm-fedora.md)
+     - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/fedora/kubelet.sh)
    - Ubuntu
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/ubuntu)
-     - [Install Kubernetes](kubeadm-ubuntu.md)
+     - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/ubuntu/kubelet.sh)
    - The nodes will have IPs in 192.168.64.0/24, see `/var/db/dhcpd_leases`
 
 1. On macOS:
