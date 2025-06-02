@@ -2,9 +2,7 @@
 
 1. Create virtual machines (nodes)
    - Create one node for the control plane (for example, `centos`)
-     - On the control plane node, initialize the cluster
    - Create one or more worker nodes (for example, `debian`,`fedora`,`ubuntu`)
-     - On each worker node, join the cluster
    - CentOS Stream
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/centos)
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/centos/kubelet.sh)
@@ -19,7 +17,7 @@
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/ubuntu/kubelet.sh)
    - The nodes will have IPs in 192.168.64.0/24, see `/var/db/dhcpd_leases`
 
-1. Initialize the cluster (e.g. `centos` for the control node and `debian` for a worker`
+1. Initialize the cluster (e.g. `centos` for the control plane node and `debian` for a worker)
    ```
    ssh centos
    kubeadm init --pod-network-cidr=10.244.0.0/16
