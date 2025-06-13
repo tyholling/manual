@@ -20,7 +20,7 @@
 1. Initialize the cluster (e.g. `centos` for the control plane node and `debian` for a worker)
    ```
    ssh centos
-   kubeadm init --pod-network-cidr=10.244.0.0/16
+   kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs
    mkdir ~/.kube
    cp -i /etc/kubernetes/admin.conf ~/.kube/config
    ```
@@ -40,7 +40,7 @@
 1. Install [flannel](https://github.com/flannel-io/flannel)
    ```
    kubectl create ns flannel
-   helm repo add flannel https://flannel-io.github.io/flannel/
+   helm repo add flannel https://flannel-io.github.io/flannel
    helm install flannel -n flannel flannel/flannel
    ```
 1. Install [metallb](https://github.com/metallb/metallb)
@@ -94,6 +94,6 @@
 1. Install [metrics-server](https://github.com/kubernetes-sigs/metrics-server)
    ```
    kubectl create ns metrics
-   helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+   helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
    helm install metrics -n metrics metrics-server/metrics-server --set args={--kubelet-insecure-tls}
    ```
