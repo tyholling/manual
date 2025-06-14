@@ -17,25 +17,48 @@
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/ubuntu/kubelet.sh)
    - The nodes will have IPs in 192.168.64.0/24, see `/var/db/dhcpd_leases`
 
-1. Initialize the cluster (e.g. `centos` for the control plane node and `debian` for a worker)
+1. Initialize the cluster
+   * Option 1: Single-node control plane
+     ```
+     ssh centos
+     kubeadm init --pod-network-cidr=10.244.0.0/16
+     ```
+   * Option 2: Multi-node control plane (high availability)
+     - The provided pod manifest uses `192.168.64.64` for the cluster virtual IP
+     Initialize the cluster:
+     ```
+     ssh centos
+     wget -P /etc/kubernetes/manifests \
+     https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
+     kubeadm init --control-plane-endpoint 192.168.64.64 \
+     --pod-network-cidr=10.244.0.0/16 --upload-certs
+     ```
+     Add nodes to the control plane:
+     ```
+     ssh debian
+     kubeadm join --control-plane ...
+     ```
+     Update and deploy `kube-vip` to the control plane:
+     ```
+     ssh centos sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
+     scp centos:/etc/kubernetes/manifests/kube-vip.yaml debian:/etc/kubernetes/manifests/
+     ```
+1. Add worker nodes
    ```
-   ssh centos
-   kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs
-   mkdir ~/.kube
-   cp -i /etc/kubernetes/admin.conf ~/.kube/config
-   ```
-   ```
-   ssh debian
+   ssh fedora
    kubeadm join ...
    ```
    - Note: for Fedora and Ubuntu, after `kubeadm init` or `kubeadm join`:
-   ```
-   systemctl enable --now systemd-resolved
-   ```
-
+     ```
+     systemctl enable --now systemd-resolved
+     ```
 1. On macOS:
    - `brew install kubectl helm`
-   - Copy `/etc/kubernetes/admin.conf` from the control plane node to `~/.kube/config`
+   - Copy `/etc/kubernetes/admin.conf` from a control plane node:
+     ```
+     mkdir ~/.kube
+     scp centos:/etc/kubernetes/admin.conf ~/.kube/config
+     ```
 
 1. Install [flannel](https://github.com/flannel-io/flannel)
    ```
