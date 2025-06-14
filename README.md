@@ -1,8 +1,8 @@
 # Run a Kubernetes cluster on macOS (arm64)
 
 1. Create virtual machines (nodes)
-   - Create one node for the control plane (e.g. `centos`)
-   - Create one or more worker nodes (e.g. `debian`, `fedora`, `ubuntu`)
+   - Create one or more nodes for the control plane (e.g. `centos`, `debian`)
+   - Create one or more worker nodes (e.g. `fedora`, `ubuntu`)
    - CentOS Stream
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/centos)
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/centos/kubelet.sh)
@@ -15,7 +15,7 @@
    - Ubuntu
      - [Virtual machine](https://github.com/tyholling/packer/tree/main/ubuntu)
      - [Install Kubernetes](https://github.com/tyholling/packer/blob/main/ubuntu/kubelet.sh)
-   - The nodes will have IPs in 192.168.64.0/24, see `/var/db/dhcpd_leases`
+   - The nodes will have IPs in `192.168.64.0/24`, see `/var/db/dhcpd_leases`
 
 1. Initialize the cluster
    * Option 1: Single-node control plane
@@ -25,6 +25,7 @@
      ```
    * Option 2: Multi-node control plane (high availability)
      - The provided pod manifest uses `192.168.64.64` for the cluster virtual IP
+
      Initialize the cluster:
      ```
      ssh centos
@@ -59,14 +60,15 @@
      mkdir ~/.kube
      scp centos:/etc/kubernetes/admin.conf ~/.kube/config
      ```
-
 1. Install [flannel](https://github.com/flannel-io/flannel)
+   - This provides the overlay network to allow pods to communicate
    ```
    kubectl create ns flannel
    helm repo add flannel https://flannel-io.github.io/flannel
    helm install flannel -n flannel flannel/flannel
    ```
 1. Install [metallb](https://github.com/metallb/metallb)
+   - This provides the load balancer to allow connections to the cluster
    ```
    kubectl create ns metallb
    helm repo add metallb https://metallb.github.io/metallb
@@ -105,6 +107,7 @@
      kubectl apply -f l2-advertisement.yaml
      ```
 1. Install [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+   - This provides the ingress to route external traffic to services
    ```
    kubectl create ns ingress
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -115,6 +118,7 @@
    curl 192.168.64.100
    ```
 1. Install [metrics-server](https://github.com/kubernetes-sigs/metrics-server)
+   - This provides memory and cpu monitoring to support pod autoscaling
    ```
    kubectl create ns metrics
    helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
