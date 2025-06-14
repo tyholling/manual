@@ -31,8 +31,8 @@
      ssh centos
      wget -P /etc/kubernetes/manifests \
      https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
-     kubeadm init --control-plane-endpoint 192.168.64.64 \
-     --pod-network-cidr=10.244.0.0/16 --upload-certs
+     kubeadm init --pod-network-cidr=10.244.0.0/16 \
+     --control-plane-endpoint 192.168.64.64 --upload-certs
      ```
      Add nodes to the control plane:
      ```
