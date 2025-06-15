@@ -124,3 +124,10 @@
    helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
    helm install metrics -n metrics metrics-server/metrics-server --set args={--kubelet-insecure-tls}
    ```
+1. Install [dynamic-localpv-provisioner](https://github.com/openebs/dynamic-localpv-provisioner)
+   - This provides dynamic provisioning of persistent volumes
+   ```
+   kubectl create ns localpv
+   helm repo add localpv https://openebs.github.io/dynamic-localpv-provisioner
+   helm install localpv -n localpv localpv/localpv-provisioner
+   ```
