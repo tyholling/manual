@@ -57,7 +57,7 @@
    - `brew install kubectl helm`
    - Copy `/etc/kubernetes/admin.conf` from a control plane node:
      ```
-     mkdir ~/.kube
+     mkdir -p ~/.kube
      scp centos:/etc/kubernetes/admin.conf ~/.kube/config
      ```
 1. Install [flannel](https://github.com/flannel-io/flannel)
