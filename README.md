@@ -49,10 +49,6 @@
    ssh fedora
    kubeadm join ...
    ```
-   - Note: for Fedora and Ubuntu, after `kubeadm init` or `kubeadm join`:
-     ```
-     systemctl enable --now systemd-resolved
-     ```
 1. On macOS:
    - `brew install kubectl helm`
    - Copy `/etc/kubernetes/admin.conf` from a control plane node:
