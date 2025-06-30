@@ -29,8 +29,12 @@
      Initialize the cluster:
      ```
      ssh centos
-     wget -P /etc/kubernetes/manifests \
+     ```
+     ```
+     curl -Os --output-dir /etc/kubernetes/manifests/ \
      https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
+     ```
+     ```
      kubeadm init --pod-network-cidr=10.244.0.0/16 \
      --control-plane-endpoint 192.168.64.64 --upload-certs
      ```
